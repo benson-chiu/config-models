@@ -6,6 +6,9 @@ name: test
 version: 1.0.0
 artifactName: test-1.0.x
 goPackage: github.com/onosproject/config-models/models/test
+generatorFlags:
+  - -ignore_unsupported
+  - -generate_simple_unions
 modules:
   - name: openconfig-interfaces
     organization: OpenConfig working group

@@ -253,6 +253,12 @@ func (c *ModelCompiler) generateGolangBindings(path string) error {
 		"--include_descriptions",
 	}
 
+	// Append per-model generator flags from metadata.yaml.
+	if len(c.metaData.GeneratorFlags) > 0 {
+		log.Infof("Appending generator flags from metadata: %v", c.metaData.GeneratorFlags)
+		args = append(args, c.metaData.GeneratorFlags...)
+	}
+
 	// Append all YANG files to the command-line arguments
 	pathDirs := []string{yangBaseDirectory}
 	err := filepath.Walk(filepath.Join(path, "yang"), func(p string, info os.FileInfo, err error) error {

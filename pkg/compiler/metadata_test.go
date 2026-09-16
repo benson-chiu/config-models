@@ -29,3 +29,21 @@ func TestValidateMetaData(t *testing.T) {
 	assert.Error(t, err)
 	assert.Equal(t, "name is mandatory", err.Error())
 }
+
+// TestLoadMetaData_GeneratorFlags checks that generatorFlags is read from
+// metadata.yaml.
+func TestLoadMetaData_GeneratorFlags(t *testing.T) {
+	md := &MetaData{LintModel: true, RequireHyphenated: true}
+	if err := LoadMetaData("../../test/metadata", "valid", md); err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, []string{"-ignore_unsupported", "-generate_simple_unions"}, md.GeneratorFlags)
+}
+
+// TestMetaData_GeneratorFlagsEmpty checks that an unset generatorFlags yields
+// no extra arguments. The append in generateGolangBindings is guarded by
+// len() > 0, so existing models are unaffected.
+func TestMetaData_GeneratorFlagsEmpty(t *testing.T) {
+	md := &MetaData{Name: "x", LintModel: true, RequireHyphenated: true}
+	assert.Empty(t, md.GeneratorFlags)
+}

@@ -1,0 +1,79 @@
+--- a/pkg/yang/yang.go
++++ b/pkg/yang/yang.go
+@@ -624,7 +624,7 @@
+ 	Parent     Node         `yang:"Parent,nomerge" json:"-"`
+ 	Extensions []*Statement `yang:"Ext" json:"-"`
+ 
+-	Augment     *Augment  `yang:"augment" json:",omitempty"`
++	Augment     []*Augment `yang:"augment" json:",omitempty"` // APN-C patch：RFC 7950 §7.13 允許多個
+ 	Description *Value    `yang:"description" json:",omitempty"`
+ 	IfFeature   []*Value  `yang:"if-feature" json:"-"`
+ 	Refine      []*Refine `yang:"refine" json:"-"`
+--- a/pkg/yang/entry.go
++++ b/pkg/yang/entry.go
+@@ -22,6 +22,7 @@
+ // TODO(borman): handle types, leafrefs, and extensions
+ 
+ import (
++	"os"
+ 	"errors"
+ 	"fmt"
+ 	"io"
+@@ -661,6 +662,26 @@
+ 		// grouping has a leafref that references outside the group.
+ 		e = ToEntry(g).dup()
+ 		addExtraKeywordsToLeafEntry(n, e)
++		// APN-C patch：套用 uses 內的 augment（RFC 7950 §7.13）。
++		// 上游 goyang 只把 uses-augment 解析進 AST 就忽略，
++		// 導致 OpenROADM 的 org-openroadm-service 等模組缺少節點。
++		// augment 的路徑是相對於 grouping 展開後的節點。
++		for _, a := range s.Augment {
++			ae := ToEntry(a)
++			target := e.Find(a.Name)
++			if target == nil {
++				if len(e.Dir) > 0 {
++					if d, ok := e.Dir[strings.TrimPrefix(a.Name, "/")]; ok {
++						target = d
++					}
++				}
++			}
++			if target == nil {
++				continue
++			}
++			target.merge(nil, ae.Namespace(), ae)
++			target.Augmented = append(target.Augmented, ae.shallowDup())
++		}
+ 		return e
+ 	}
+ 
+@@ -1470,6 +1491,10 @@
+ 	return &ne
+ }
+ 
++// lenientDuplicate 由環境變數 GOYANG_LENIENT_DUPLICATE 控制，
++// 開啟時對條件式 augment 的同名節點採遞迴合併而非報錯（APN-C patch）。
++var lenientDuplicate = os.Getenv("GOYANG_LENIENT_DUPLICATE") == "1"
++
+ // merge merges a duplicate of oe.Dir into e.Dir, setting the prefix of each
+ // element to prefix, if not nil.  It is an error if e and oe contain common
+ // elements.
+@@ -1484,6 +1509,19 @@
+ 			v.namespace = namespace
+ 		}
+ 		if se := e.Dir[k]; se != nil {
++			// APN-C patch：條件式 augment 的寬容合併。
++			// OpenROADM 常見兩個模組 augment 到同一目標並加同名節點，
++			// 以 when 條件互斥（例如 org-openroadm-network-topology 與
++			// org-openroadm-otn-network-topology 都加 xpdr-attributes，
++			// 分別 when node-type='DEGREE' 與 'MUXPDR'/'SWITCH'/'TPDR'）。
++			// 嚴格依 RFC 7950 這是衝突，但實務上工具多半容忍。
++			// 開啟 GOYANG_LENIENT_DUPLICATE=1 時遞迴合併子節點而非報錯。
++			if lenientDuplicate {
++				if se.Dir != nil && v.Dir != nil {
++					se.merge(prefix, namespace, v)
++				}
++				continue
++			}
+ 			er := newError(oe.Node, `Duplicate node %q in %q from:
+    %s: %s
+    %s: %s`, k, e.Name, Source(v.Node), v.Name, Source(se.Node), se.Name)

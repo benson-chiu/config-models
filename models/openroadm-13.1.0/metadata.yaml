@@ -1,0 +1,381 @@
+name: openroadm
+version: 13.1.0
+artifactName: openroadm
+goPackage: github.com/onosproject/config-models/models/openroadm-13.1.0
+openAPITargetAlias: device-id
+contactName: APN-C
+contactUrl: https://example.org
+contactEmail: apnc@example.org
+licenseName: Apache-2.0
+licenseUrl: https://www.apache.org/licenses/LICENSE-2.0
+lintModel: false
+requireHyphenated: false
+formatYang: false
+generatorFlags:
+  - -ignore_unsupported
+  - -generate_simple_unions
+modules:
+  - name: org-openroadm-alarm
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-alarm.yang
+  - name: org-openroadm-amplifier
+    organization: Open ROADM MSA
+    revision: 2021-09-24
+    file: org-openroadm-amplifier.yang
+  - name: org-openroadm-ber-test
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-ber-test.yang
+  - name: org-openroadm-clli-network
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-clli-network.yang
+  - name: org-openroadm-common-alarm-pm-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-common-alarm-pm-types.yang
+  - name: org-openroadm-common-amplifier-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-common-amplifier-types.yang
+  - name: org-openroadm-common-attributes
+    organization: Open ROADM MSA
+    revision: 2021-09-24
+    file: org-openroadm-common-attributes.yang
+  - name: org-openroadm-common-ber-test
+    organization: Open ROADM MSA
+    revision: 2020-05-29
+    file: org-openroadm-common-ber-test.yang
+  - name: org-openroadm-common-equipment-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-common-equipment-types.yang
+  - name: org-openroadm-common-link-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-common-link-types.yang
+  - name: org-openroadm-common-network
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-common-network.yang
+  - name: org-openroadm-common-node-types
+    organization: Open ROADM MSA
+    revision: 2021-05-28
+    file: org-openroadm-common-node-types.yang
+  - name: org-openroadm-common-optical-channel-types
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-common-optical-channel-types.yang
+  - name: org-openroadm-common-phy-codes
+    organization: Open ROADM MSA
+    revision: 2022-05-27
+    file: org-openroadm-common-phy-codes.yang
+  - name: org-openroadm-common-service-types
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-common-service-types.yang
+  - name: org-openroadm-common-state-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-common-state-types.yang
+  - name: org-openroadm-common-types
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-common-types.yang
+  - name: org-openroadm-controller-customization
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-controller-customization.yang
+  - name: org-openroadm-database
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-database.yang
+  - name: org-openroadm-de-operations
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-de-operations.yang
+  - name: org-openroadm-degree
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-degree.yang
+  - name: org-openroadm-device-types
+    organization: Open ROADM MSA
+    revision: 2022-12-09
+    file: org-openroadm-device-types.yang
+  - name: org-openroadm-device
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-device.yang
+  - name: org-openroadm-dhcp
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-dhcp.yang
+  - name: org-openroadm-equipment-states-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-equipment-states-types.yang
+  - name: org-openroadm-ethernet-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-ethernet-interfaces.yang
+  - name: org-openroadm-external-pluggable
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-external-pluggable.yang
+  - name: org-openroadm-fcc-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-fcc-interfaces.yang
+  - name: org-openroadm-file-transfer
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-file-transfer.yang
+  - name: org-openroadm-fwdl
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-fwdl.yang
+  - name: org-openroadm-gcc-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-gcc-interfaces.yang
+  - name: org-openroadm-gnmi
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-gnmi.yang
+  - name: org-openroadm-interfaces
+    organization: Open ROADM MSA
+    revision: 2022-09-30
+    file: org-openroadm-interfaces.yang
+  - name: org-openroadm-ip
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-ip.yang
+  - name: org-openroadm-ipv4-unicast-routing
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-ipv4-unicast-routing.yang
+  - name: org-openroadm-ipv6-unicast-routing
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-ipv6-unicast-routing.yang
+  - name: org-openroadm-key-chain
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-key-chain.yang
+  - name: org-openroadm-layerRate
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-layerRate.yang
+  - name: org-openroadm-link
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-link.yang
+  - name: org-openroadm-lldp
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-lldp.yang
+  - name: org-openroadm-ltp-template
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-ltp-template.yang
+  - name: org-openroadm-maintenance-loopback
+    organization: Open ROADM MSA
+    revision: 2020-09-25
+    file: org-openroadm-maintenance-loopback.yang
+  - name: org-openroadm-maintenance-testsignal
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-maintenance-testsignal.yang
+  - name: org-openroadm-manifest-file
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-manifest-file.yang
+  - name: org-openroadm-media-channel-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-media-channel-interfaces.yang
+  - name: org-openroadm-network-media-channel-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-network-media-channel-interfaces.yang
+  - name: org-openroadm-network-resource
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-network-resource.yang
+  - name: org-openroadm-network-topology-types
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-network-topology-types.yang
+  - name: org-openroadm-network-topology
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-network-topology.yang
+  - name: org-openroadm-network-types
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-network-types.yang
+  - name: org-openroadm-network
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-network.yang
+  - name: org-openroadm-operational-mode-catalog
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-operational-mode-catalog.yang
+  - name: org-openroadm-optical-channel-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-optical-channel-interfaces.yang
+  - name: org-openroadm-optical-operational-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-optical-operational-interfaces.yang
+  - name: org-openroadm-optical-transport-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-optical-transport-interfaces.yang
+  - name: org-openroadm-optical-tributary-signal-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-optical-tributary-signal-interfaces.yang
+  - name: org-openroadm-ospf
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-ospf.yang
+  - name: org-openroadm-otn-common-types
+    organization: Open ROADM MSA
+    revision: 2021-09-24
+    file: org-openroadm-otn-common-types.yang
+  - name: org-openroadm-otn-common
+    organization: Open ROADM MSA
+    revision: 2022-03-25
+    file: org-openroadm-otn-common.yang
+  - name: org-openroadm-otn-network-topology
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-otn-network-topology.yang
+  - name: org-openroadm-otn-odu-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-otn-odu-interfaces.yang
+  - name: org-openroadm-otn-otu-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-otn-otu-interfaces.yang
+  - name: org-openroadm-otsi-group-interfaces
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-otsi-group-interfaces.yang
+  - name: org-openroadm-physical-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-physical-types.yang
+  - name: org-openroadm-pluggable-optics-holder-capability
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-pluggable-optics-holder-capability.yang
+  - name: org-openroadm-pm-types
+    organization: Open ROADM MSA
+    revision: 2022-12-09
+    file: org-openroadm-pm-types.yang
+  - name: org-openroadm-pm
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-pm.yang
+  - name: org-openroadm-port-capability
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-port-capability.yang
+  - name: org-openroadm-port-types
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-port-types.yang
+  - name: org-openroadm-probable-cause
+    organization: Open ROADM MSA
+    revision: 2023-03-31
+    file: org-openroadm-probable-cause.yang
+  - name: org-openroadm-prot-equipment-aps
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-prot-equipment-aps.yang
+  - name: org-openroadm-prot-otn-linear-aps
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-prot-otn-linear-aps.yang
+  - name: org-openroadm-resource-types
+    organization: Open ROADM MSA
+    revision: 2022-03-25
+    file: org-openroadm-resource-types.yang
+  - name: org-openroadm-resource
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-resource.yang
+  - name: org-openroadm-roadm
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-roadm.yang
+  - name: org-openroadm-routing-constraints
+    organization: Open ROADM MSA
+    revision: 2022-12-09
+    file: org-openroadm-routing-constraints.yang
+  - name: org-openroadm-routing
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-routing.yang
+  - name: org-openroadm-rstp
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-rstp.yang
+  - name: org-openroadm-security
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-security.yang
+  - name: org-openroadm-service-format
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-service-format.yang
+  - name: org-openroadm-service
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-service.yang
+  - name: org-openroadm-srg
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-srg.yang
+  - name: org-openroadm-swdl
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-swdl.yang
+  - name: org-openroadm-switching-pool-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-switching-pool-types.yang
+  - name: org-openroadm-syslog
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-syslog.yang
+  - name: org-openroadm-tca
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-tca.yang
+  - name: org-openroadm-telemetry-types
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-telemetry-types.yang
+  - name: org-openroadm-topology
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-topology.yang
+  - name: org-openroadm-user-mgmt
+    organization: Open ROADM MSA
+    revision: 2020-09-25
+    file: org-openroadm-user-mgmt.yang
+  - name: org-openroadm-wavelength-map
+    organization: Open ROADM MSA
+    revision: 2019-11-29
+    file: org-openroadm-wavelength-map.yang
+  - name: org-openroadm-xponder
+    organization: Open ROADM MSA
+    revision: 2023-05-26
+    file: org-openroadm-xponder.yang

@@ -28,6 +28,17 @@ type MetaData struct {
 	ContactEmail       string   `mapstructure:"contactEmail" yaml:"contactEmail"`
 	LicenseName        string   `mapstructure:"licenseName" yaml:"licenseName"`
 	LicenseUrl         string   `mapstructure:"licenseUrl" yaml:"licenseUrl"`
+
+	// GeneratorFlags holds extra flags passed to the ygot generator.
+	//
+	// Some YANG needs additional generator options. The full OpenROADM model
+	// requires -ignore_unsupported (ygot cannot map notification/rpc and
+	// aborts on them) and -generate_simple_unions (wrapper unions reject
+	// default values).
+	//
+	// Per-model on purpose: -generate_simple_unions changes how unions are
+	// represented in Go, so enabling it globally would alter existing models.
+	GeneratorFlags []string `mapstructure:"generatorFlags" yaml:"generatorFlags"`
 }
 
 type Module struct {
