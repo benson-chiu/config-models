@@ -1,18 +1,23 @@
 # patches
 
-Patches required to build some models in this branch. Applied by
-`ows-adapter/scripts/build-openroadm-full.sh`.
+Fixes applied during the build. `scripts/build-model.sh` applies them
+automatically; this file documents what they do and how to re-apply them by
+hand.
 
 | patch | target | why |
 |---|---|---|
-| `config-models-generator-flags.patch` | this repo | Adds the `generatorFlags` metadata field so a model can request extra ygot generator options. Already committed on the APN-C branch — kept here for reference and for re-applying after an upstream merge conflict. |
-| `ygot-v0.28.3-anydata.patch` | `github.com/openconfig/ygot@v0.28.3` | `gogen/gogen.go` aborts on `anydata` even though `ygen/codegen.go` already skips `AnyDataEntry`. Needed by `org-openroadm-ltp-template`. |
-| `goyang-v1.4.0-uses-augment.patch` | `github.com/openconfig/goyang@v1.4.0` | `Uses.Augment` is a single value but RFC 7950 §7.13 allows several, and goyang never applies uses-augments at all. Also adds lenient merging for conditional augments (opt-in via `GOYANG_LENIENT_DUPLICATE=1`). |
+| `ygot-v0.28.3-anydata.patch` | `github.com/openconfig/ygot@v0.28.3` | `gogen/gogen.go` aborts on `anydata` and `anyxml` even when `-ignore_unsupported` is set, while `ygen/codegen.go` already skips `AnyDataEntry` unconditionally. Any model declaring `anydata` fails to generate without this. |
+| `goyang-v1.4.0-uses-augment.patch` | `github.com/openconfig/goyang@v1.4.0` | `Uses.Augment` holds a single value although RFC 7950 §7.13 allows several, and goyang parses uses-augments into the AST without ever applying them. Also adds lenient merging for conditional augments, enabled by `GOYANG_LENIENT_DUPLICATE=1`. |
+| `config-models-generator-flags.patch` | this repository | Adds the `generatorFlags` metadata field so a model can request extra ygot generator options. Already applied in the committed source; kept for re-applying after an upstream merge conflict. |
 
-## Applying the external ones
+Both external patches fix upstream gaps that affect any model using the
+construct. They are applied by default and change nothing for models that do
+not use these features.
 
-The repo pins `ygot v0.28.3` and `goyang v1.4.0`, which is exactly what these
-patches target.
+## Applying the external patches by hand
+
+The repository pins `ygot v0.28.3` and `goyang v1.4.0`, which is what these
+patches target. Copy out of the module cache first: it is read-only.
 
 ```bash
 cp -r $(go env GOMODCACHE)/github.com/openconfig/ygot@v0.28.3   /tmp/ygot-patched
@@ -26,7 +31,11 @@ go mod edit -replace github.com/openconfig/ygot=/tmp/ygot-patched
 go mod edit -replace github.com/openconfig/goyang=/tmp/goyang-patched
 ```
 
-Revert `go.mod` and `go.sum` once the binaries are built — `/tmp` paths must
-not be committed. The build script does this automatically.
+Revert `go.mod` and `go.sum` once the binaries are built; `/tmp` paths must
+not be committed. The build script does this for you.
 
-See `README-APN-C.md` for the full build flow.
+If a patch no longer applies, the pinned version has changed. Re-create it
+against the new version rather than forcing it: both patches touch code paths
+where a silent partial application produces a schema that is missing nodes.
+
+See `../README.md` for the full build flow.

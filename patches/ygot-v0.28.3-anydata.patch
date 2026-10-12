@@ -8,22 +8,23 @@
  	"bytes"
  	"fmt"
  	"io"
-@@ -1191,7 +1192,17 @@
+@@ -1191,7 +1192,18 @@
  				IsScalarField: scalarField,
  			}
  		default:
 -			errs = append(errs, fmt.Errorf("unknown entity type for mapping to Go: %s, Kind: %v", field.YANGDetails.Path, field.Type))
-+			// APN-C patch：anydata / anyxml 等無法映射為 Go 型別的節點，
-+			// 在 IgnoreUnsupportedStatements 開啟時跳過而非中止。
-+			// 上游 ygot 只在 ygen/codegen.go 的 findMappableEntities 檢查此旗標，
-+			// 沒有傳遞到這裡，導致含 anydata 的模組無法產生（例如
-+			// org-openroadm-ltp-template 的 anydata netconf-operation）。
-+			// 上游 ygen/codegen.go 的 findMappableEntities 對 yang.AnyDataEntry
-+			// 已是無條件 continue，但這裡的 default 分支沒有對應處理，
-+			// 導致含 anydata 的模組整份無法產生
-+			// （例如 org-openroadm-ltp-template 的 anydata netconf-operation）。
-+			// 這裡改為跳過並記錄，與上游對 anydata 的既有行為一致。
-+			log.Warningf("APN-C patch: 跳過無法映射為 Go 型別的節點 %s (Kind: %v)", field.YANGDetails.Path, field.Type)
++			// Skip nodes that have no Go representation, such as anydata
++			// and anyxml, instead of aborting the whole module.
++			//
++			// ygen/codegen.go findMappableEntities already skips
++			// yang.AnyDataEntry unconditionally, but that decision is not
++			// propagated here, so this branch fails the generation. Any
++			// module declaring anydata is affected; in OpenROADM it is
++			// org-openroadm-ltp-template with its netconf-operation node.
++			//
++			// Skipping and logging keeps the behaviour consistent with
++			// findMappableEntities.
++			log.Warningf("skipping node with no Go representation: %s (Kind: %v)", field.YANGDetails.Path, field.Type)
  			continue
  		}
  
